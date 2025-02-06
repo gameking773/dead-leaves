@@ -20,14 +20,19 @@ class DeadLeaves(sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = randint(0, screen_width)
         self.rect.y = randint(-20, screen_height)
+        self.vitesse = uniform(0.5, 2.0) 
+        self.direction = choice([-2, 2]) 
+        self.taille = randint(2, 4)
 
     def update(self):
-        self.rect.y += 1
-        self.rect.x += randint(-10, 10)
-        if self.rect.y > screen_height:
+        self.rect.y += self.vitesse
+        self.rect.x += self.direction*0.5
+        if self.rect.x <= 0 or self.rect.x >= screen_width:
+            self.direction *= -1
+        if self.rect.y >= screen_height:
             self.rect.y = randint(-20,-1)
             self.rect.x = randint(0, screen_width)
-        
+
 leaves = sprite.Group()
 
 for i in range (100):
@@ -42,7 +47,8 @@ while running:
         if e.type == QUIT:
             running = False
 
-    leaves.update()
+    for leaf in leaves:
+        leaf.update()
 
     leaves.draw(screen)
 
