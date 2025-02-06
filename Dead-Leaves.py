@@ -5,7 +5,7 @@ init()
 
 screen_width = 600
 screen_height = 600
-
+police = font.SysFont("Arial", 30)
 screen = display.set_mode((screen_height, screen_width))
 display.set_caption("Dead Leaves")
 
@@ -39,6 +39,8 @@ for i in range (100):
     leaf = DeadLeaves()
     leaves.add(leaf)
 
+score = 0
+
 running = True
 while running:
     screen.fill((0, 0, 0))
@@ -48,9 +50,14 @@ while running:
             running = False
 
     for leaf in leaves:
-        leaf.update()
+        if leaf.update():
+            score += 1
+        
 
     leaves.draw(screen)
+
+    scoretxt = police.render(f"Score: {score}", True, (255, 255, 255))
+    screen.blit(scoretxt, (screen_width - scoretxt.get_width() - 20, 20))
 
     display.flip()
 
