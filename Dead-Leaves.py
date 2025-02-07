@@ -55,7 +55,7 @@ r,v,b = 0,0,0
 running = True
 
 while running:
-    r = r  % 256  
+    r = r % 256  
 
     screen.fill((r,v,b))
 
@@ -77,9 +77,9 @@ while running:
                 leaf.y = randint(-100, -10)
                 suppLeaf.append(leaf)
                 leaves.add(newLeaf())  
-                r+=1
+                r+=0.25
 
-    # Supprimer les feuilles touchées
+
     for feuille in suppLeaf:
         leaves.remove(feuille)
 
