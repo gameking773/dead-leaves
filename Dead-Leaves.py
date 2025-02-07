@@ -12,6 +12,9 @@ display.set_caption("Dead Leaves")
 leaf1 = image.load('sprites/leaf1.png')
 leaf2 = image.load('sprites/leaf2.png')
 
+clock = time.Clock()
+afficherFps = False
+
 class DeadLeaves(sprite.Sprite):
     def __init__(self):
         super().__init__()
@@ -64,6 +67,9 @@ while running:
     for e in event.get():
         if e.type == QUIT:
             running = False
+        if e.type == KEYDOWN:
+            if e.key == K_f:
+                afficherFps = not afficherFps
 
     curseur_x, curseur_y = mouse.get_pos()
 
@@ -89,8 +95,13 @@ while running:
     scoretxt = police.render(f"Score: {score}", True, (255, 0, 0))
     screen.blit(scoretxt, (screen_width - scoretxt.get_width() - 20, 20))
 
+    if afficherFps:
+        fonts = font.Font(None, 36)
+        text = fonts.render(str(int(clock.get_fps())), 1, Color("WHITE"))
+        screen.blit(text, (0, 0))
+
     display.flip()
 
-    time.Clock().tick(60)
+    clock.tick(60)
 
 quit()
