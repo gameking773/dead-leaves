@@ -37,7 +37,7 @@ class DeadLeaves(sprite.Sprite):
             self.rect.x = randint(0, screen_width)
 
     def touchedby(self, curseur_x, curseur_y):
-        return (self.rect.x <= curseur_x <= self.rect.x + self.taille * 20) and (self.rect.y <= curseur_y <= self.rect.y + self.taille*20)
+        return (self.rect.x <= curseur_x <= self.rect.x + self.taille * 10) and (self.rect.y <= curseur_y <= self.rect.y + self.taille*10)
 
 
 leaves = sprite.Group()
